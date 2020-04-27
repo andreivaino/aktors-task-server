@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,15 +28,18 @@ public class Order implements Serializable {
     @Column(name = "order_number")
     private Long orderNumber;
 
+    @NotNull
     @Type(type = "big_decimal")
     @Column(name = "price")
     private BigDecimal price;
 
+    @NotNull
     @CreatedDate
     @Column(name = "transaction_date")
     private Date transactionDate;
 
-    @ManyToOne(targetEntity = Client.class, optional = false)
+    @NotNull
+    @ManyToOne(targetEntity = Client.class)
     @JoinColumn(name = "client_personal_id")
     private Client client;
 
